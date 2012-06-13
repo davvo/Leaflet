@@ -35,6 +35,14 @@ L.Polygon = L.Polyline.extend({
 			}
 		}
 	},
+	
+	spliceHole: function (holeIndex, index, howMany) {
+		if (this._holes && this._holes[holeIndex] instanceof Array) {
+			var removed = [].splice.apply(this._holes[holeIndex], arguments.slice(1));
+			this.redraw();
+			return removed;
+		}
+	},
 
 	_clipPoints: function () {
 		var points = this._originalPoints,
